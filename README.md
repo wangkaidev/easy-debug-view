@@ -1,6 +1,8 @@
 # easy-debug-view
 Simple and fast debug output viewer for Windows.
 
+Administrator role is needed when running the program.
+
 ## Build
 ### Configure and build using CMake
 ```console
