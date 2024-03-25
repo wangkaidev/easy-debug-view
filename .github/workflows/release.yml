@@ -1,0 +1,41 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'release/v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+name: Create Release
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Configure CMake
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - name: Build and package
+        run: cmake --build build --config RelWithDebInfo --target package
+      - name: Upload ZIP as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: easy_debug_view-zip
+          path: ${{github.workspace}}/build/easy_debug_view.zip
+
+  release:
+      name: Release
+      runs-on: windows-latest
+      needs: build
+      steps:
+        - name: Download ZIP Artifact
+          uses: actions/download-artifact@v2
+          with:
+            name: easy_debug_view-zip
+            path: .
+
+        - name: Release
+          uses: softprops/action-gh-release@v2
+          with:
+            draft: true
+            files: easy_debug_view.zip

@@ -50,23 +50,15 @@ add_executable(${TARGET_NAME} ${SOURCE_FILES})
 
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT ${TARGET_NAME})
 
+install(TARGETS ${TARGET_NAME} DESTINATION .)
+install(FILES ${CMAKE_SOURCE_DIR}/LICENSE DESTINATION .)
+install(FILES ${CMAKE_SOURCE_DIR}/README.md DESTINATION .)
+install(FILES $<TARGET_PDB_FILE:${TARGET_NAME}> DESTINATION / OPTIONAL COMPONENT symbols)
+
+set(CPACK_PACKAGE_FILE_NAME "easy_debug_view")
 set(CPACK_PACKAGE_NAME "easy_debug_view")
 set(CPACK_PACKAGE_DESCRIPTION "Easy and fast debug output viewer for Windows")
-set(CPACK_COMPONENTS_GROUPING ONE_PER_GROUP)
-SET(CPACK_ARCHIVE_COMPONENT_INSTALL ON)
 
 set(CPACK_GENERATOR "ZIP")
 
-get_cmake_property(CPACK_COMPONENTS_ALL COMPONENTS)
-list(REMOVE_ITEM CPACK_COMPONENTS_ALL "Unspecified")
-
 include(CPack)
-
-cpack_add_component(easy_debug_view
-    DISPLAY_NAME "easy_debug_view"
-    DESCRIPTION "Easy debug view package"
-    )
-cpack_add_component(symbols
-    DISPLAY_NAME "Symbols"
-    DESCRIPTION "Symbols package"
-    )
