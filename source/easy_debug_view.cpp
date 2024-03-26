@@ -151,7 +151,7 @@ void listen_sys_debug_output()
 {
     ThrowIfFalse(SetConsoleCtrlHandler((PHANDLER_ROUTINE)(console_ctrl_handler), TRUE) == TRUE, "Failed to set console control handler.");
 
-    WinHandle mutex = ::OpenMutex(MUTEX_ALL_ACCESS, FALSE, DBWIN_MUTEX_NAME);
+    WinHandle mutex = ::OpenMutex(SYNCHRONIZE, FALSE, DBWIN_MUTEX_NAME);
     if (!mutex)
     {
         ThrowIfFalse(GetLastError() == ERROR_FILE_NOT_FOUND, "Failed to open mutex due to file not found error. Please try to use Admin to run the program.");
