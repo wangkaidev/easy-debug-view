@@ -10,8 +10,6 @@ The program is console based and all the output can be redirected to a file.
 easy-debug-view.exe>log.txt
 ```
 
-Administrator role is needed when running the program.
-
 ## Build
 ### Configure and build using CMake
 ```console
