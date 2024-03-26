@@ -1,4 +1,4 @@
-# easy-debug-view
+# Easy Debug View
 
 Simple and fast debug output viewer for Windows.
 
