@@ -4,6 +4,7 @@ Simple and fast debug output viewer for Windows.
 
 It is a super lightweight but faster alternative of [debugview](https://learn.microsoft.com/en-us/sysinternals/downloads/debugview) for user mode debug output. 
 
+## Usage
 The program is console based and all the output can be redirected to a file.
 
 ```console
